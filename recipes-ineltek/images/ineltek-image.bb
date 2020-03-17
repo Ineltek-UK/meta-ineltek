@@ -9,7 +9,6 @@ IMAGE_INSTALL = "\
     libusb1 \
     packagegroup-core-boot \
     packagegroup-core-full-cmdline \
-    packagegroup-base-usbhost \
     packagegroup-base-usbgadget \
     openssh-sftp \
     openssh-sftp-server \
