@@ -7,11 +7,9 @@ SRC_URI_append += " file://envs/eink_extcon_demo.txt"
 
 do_configure () {
     # Configure U-Boot Environment Storage Location
-    #echo "CONFIG_ENV_OFFSET=${UBOOT_ENV_STORAGE_ADDRESS}"  >> ${S}/configs/${UBOOT_MACHINE}
-    #echo "CONFIG_ENV_SIZE=${UBOOT_ENV_STORAGE_SIZE}"  >> ${S}/configs/${UBOOT_MACHINE}
-    echo "CONFIG_ENV_OFFSET=0x8000"  >> ${S}/configs/${UBOOT_MACHINE}
-    echo "CONFIG_ENV_SIZE=0x2000"  >> ${S}/configs/${UBOOT_MACHINE}
-    # Configure U-Boot Environment Storage
+    echo "CONFIG_ENV_OFFSET=${UBOOT_ENV_ADDRESS}"  >> ${S}/configs/${UBOOT_MACHINE}
+    echo "CONFIG_ENV_SIZE=${UBOOT_ENV_SIZE}"  >> ${S}/configs/${UBOOT_MACHINE}
+    # Configure U-Boot Environ#ment Storage
     echo "CONFIG_ENV_SPI_BUS=0"  >> ${S}/configs/${UBOOT_MACHINE}
     echo "CONFIG_ENV_SPI_CS=0"  >> ${S}/configs/${UBOOT_MACHINE}
     echo "CONFIG_ENV_SPI_MODE=0"  >> ${S}/configs/${UBOOT_MACHINE}
