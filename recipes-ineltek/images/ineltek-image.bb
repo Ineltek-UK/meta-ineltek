@@ -5,8 +5,6 @@ PR = "r0"
 IMAGE_FEATURES += "ssh-server-openssh package-management"
 IMAGE_INSTALL += "stb"
 
-
-
 IMAGE_INSTALL = "\
     libusb1 \
     packagegroup-core-boot \
