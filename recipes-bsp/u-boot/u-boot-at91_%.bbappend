@@ -5,6 +5,9 @@ ENV_FILENAME = "u-boot-env.bin"
 FILESEXTRAPATHS_prepend := "${THISDIR}/files/:"
 SRC_URI_append += " file://envs/eink_extcon_demo.txt"
 
+#U-Boot Config - environment variables in QSPI flash
+UBOOT_MACHINE = "sama5d27_som1_ek_qspiflash_defconfig"
+
 do_configure () {
     # Configure U-Boot Environment Storage Location
     echo "CONFIG_ENV_OFFSET=${UBOOT_ENV_ADDRESS}"  >> ${S}/configs/${UBOOT_MACHINE}

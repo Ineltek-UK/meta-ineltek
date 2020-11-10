@@ -1,2 +1,2 @@
 bootargs=console=ttyS0,115200 earlyprintk root=/dev/mmcblk1p1 rw rootwait
-bootcmd=sf probe 0; sf read 0x21000000 0x70000 0xC000; sf read 0x22000000 0x7C000 0x400000; bootz 0x22000000 - 0x21000000
+bootcmd=sf probe 0; sf read 0x21000000 0xA0000 0xC000; sf read 0x22000000 0xAC000 0x4A0000; bootz 0x22000000 - 0x21000000
