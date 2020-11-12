@@ -91,22 +91,22 @@ inherit core-image
 
 ineltek_image_final() {
     # Copy AT91Bootstrap Binary
-    cp ${TMPDIR}/deploy/images/${MACHINE}/at91bootstrap.bin \
+    cp ${DEPLOY_DIR}/images/${MACHINE}/at91bootstrap.bin \
     ${CUSTOM_DEPLOY_DIR}/at91bootstrap.bin
     # Copy U-Boot Binary
-    cp ${TMPDIR}/deploy/images/${MACHINE}/u-boot.bin \
+    cp ${DEPLOY_DIR}/images/${MACHINE}/u-boot.bin \
     ${CUSTOM_DEPLOY_DIR}/u-boot.bin
     # Copy U-Boot Env Binary
-    #cp ${TMPDIR}/deploy/images/${MACHINE}/u-boot-env.bin \
+    #cp ${DEPLOY_DIR}/images/${MACHINE}/u-boot-env.bin \
     #${CUSTOM_DEPLOY_DIR}/u-boot-env.bin
     # Copy Device Tree
-    cp ${TMPDIR}/deploy/images/${MACHINE}/${KERNEL_DEVICETREE} \
+    cp ${DEPLOY_DIR}/images/${MACHINE}/${KERNEL_DEVICETREE} \
     ${CUSTOM_DEPLOY_DIR}/${KERNEL_DEVICETREE}
     # Copy Kernel Binary
-    cp ${TMPDIR}/deploy/images/${MACHINE}/zImage \
+    cp ${DEPLOY_DIR}/images/${MACHINE}/zImage \
     ${CUSTOM_DEPLOY_DIR}/zImage.bin
     # Copy Root Filesystem
-    cp ${TMPDIR}/deploy/images/${MACHINE}/${IMAGE_BASENAME}-${MACHINE}.wic \
+    cp ${DEPLOY_DIR}/images/${MACHINE}/${IMAGE_BASENAME}-${MACHINE}.wic \
     ${CUSTOM_DEPLOY_DIR}/${IMAGE_BASENAME}-${MACHINE}.wic
 
     # Create virtual image for RootFS with 2 GiB size
