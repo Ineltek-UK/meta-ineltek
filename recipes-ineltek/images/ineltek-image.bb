@@ -97,8 +97,8 @@ ineltek_image_final() {
     cp ${DEPLOY_DIR}/images/${MACHINE}/u-boot.bin \
     ${CUSTOM_DEPLOY_DIR}/u-boot.bin
     # Copy U-Boot Env Binary
-    #cp ${DEPLOY_DIR}/images/${MACHINE}/u-boot-env.bin \
-    #${CUSTOM_DEPLOY_DIR}/u-boot-env.bin
+    cp ${DEPLOY_DIR}/images/${MACHINE}/u-boot-env.bin \
+    ${CUSTOM_DEPLOY_DIR}/u-boot-env.bin
     # Copy Device Tree
     cp ${DEPLOY_DIR}/images/${MACHINE}/${KERNEL_DEVICETREE} \
     ${CUSTOM_DEPLOY_DIR}/${KERNEL_DEVICETREE}

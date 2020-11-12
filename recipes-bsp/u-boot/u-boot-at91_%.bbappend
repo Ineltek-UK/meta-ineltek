@@ -3,7 +3,7 @@ COMPATIBLE_MACHINE = "eink-extcon-demo"
 ENV_FILENAME = "u-boot-env.bin"
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/files/:"
-SRC_URI_append += " file://envs/eink_extcon_demo.txt"
+SRC_URI_append += " file://envs/eink-extcon-demo.txt"
 
 #U-Boot Config - environment variables in QSPI flash
 UBOOT_MACHINE = "sama5d27_som1_ek_qspiflash_defconfig"
