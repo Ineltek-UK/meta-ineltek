@@ -110,6 +110,6 @@ ineltek_image_final() {
     ${CUSTOM_DEPLOY_DIR}/${IMAGE_BASENAME}-${MACHINE}.wic
 
     # Create virtual image for RootFS with 2 GiB size
-    #dd if=/dev/zero of=sd_rootfs.img bs=1M count=2048
+    dd if=/dev/zero of=${CUSTOM_DEPLOY_DIR}/${IMAGE_BASENAME}-${MACHINE}.img bs=1M count=2048
 }
 ROOTFS_POSTPROCESS_COMMAND += "ineltek_image_final; "
