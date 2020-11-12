@@ -1,4 +1,4 @@
-COMPATIBLE_MACHINE = "eink_extcon_demo"
+COMPATIBLE_MACHINE = "eink-extcon-demo"
 
 ENV_FILENAME = "u-boot-env.bin"
 

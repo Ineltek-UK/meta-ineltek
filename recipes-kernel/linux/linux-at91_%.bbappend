@@ -1,4 +1,4 @@
-COMPATIBLE_MACHINE = "eink_extcon_demo"
+COMPATIBLE_MACHINE = "eink-extcon-demo"
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/files/:"
 SRC_URI_append += " file://ineltek_config.cfg \
