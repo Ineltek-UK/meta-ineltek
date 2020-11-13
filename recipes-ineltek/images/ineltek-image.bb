@@ -105,8 +105,8 @@ do_build_complete() {
     cp ${DEPLOY_DIR}/images/${MACHINE}/zImage \
     ${CUSTOM_DEPLOY_DIR}/zImage.bin
 
-    # Ensures BitBake can find the bmaptool command
-    export PATH="/usr/bin"
+    # Ensures BitBake can find the bmaptool and dd command
+    export PATH="/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin"
     # Create virtual image for RootFS with 2 GiB size
     dd if=/dev/zero of=${DEPLOY_DIR}/images/${MACHINE}/${IMAGE_BASENAME}-${MACHINE}.img bs=1M count=1
     # Copy the wic file to our virtual image
