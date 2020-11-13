@@ -86,10 +86,9 @@ IMAGE_INSTALL = "\
     tcpdump \
 "
 
-inherit core-image
-#populate_sdk
+inherit core-image populate_sdk
 
-ineltek_image_final() {
+do_build_complete() {
     # Copy AT91Bootstrap Binary
     cp ${DEPLOY_DIR}/images/${MACHINE}/at91bootstrap.bin \
     ${CUSTOM_DEPLOY_DIR}/at91bootstrap.bin
@@ -105,11 +104,21 @@ ineltek_image_final() {
     # Copy Kernel Binary
     cp ${DEPLOY_DIR}/images/${MACHINE}/zImage \
     ${CUSTOM_DEPLOY_DIR}/zImage.bin
-    # Copy Root Filesystem
-    cp ${DEPLOY_DIR}/images/${MACHINE}/${IMAGE_BASENAME}-${MACHINE}.wic \
-    ${CUSTOM_DEPLOY_DIR}/${IMAGE_BASENAME}-${MACHINE}.wic
 
+    # Ensures BitBake can find the bmaptool command
+    export PATH="/usr/bin"
     # Create virtual image for RootFS with 2 GiB size
-    dd if=/dev/zero of=${CUSTOM_DEPLOY_DIR}/${IMAGE_BASENAME}-${MACHINE}.img bs=1M count=2048
+    dd if=/dev/zero of=${DEPLOY_DIR}/images/${MACHINE}/${IMAGE_BASENAME}-${MACHINE}.img bs=1M count=1
+    # Copy the wic file to our virtual image
+    bmaptool copy ${DEPLOY_DIR}/images/${MACHINE}/${IMAGE_BASENAME}-${MACHINE}.wic \
+    ${DEPLOY_DIR}/images/${MACHINE}/${IMAGE_BASENAME}-${MACHINE}.img
+    # Copy Virtual Image
+    cp ${DEPLOY_DIR}/images/${MACHINE}/${IMAGE_BASENAME}-${MACHINE}.img \
+    ${CUSTOM_DEPLOY_DIR}/${IMAGE_BASENAME}-${MACHINE}.img
+
+    # Copy SAM-BA QML
+    cp ${THISDIR}/../../sam-ba-configs/eink-extcon-demo-qspiflash.qml \
+    ${CUSTOM_DEPLOY_DIR}/eink-extcon-demo-qspiflash.qml
 }
-ROOTFS_POSTPROCESS_COMMAND += "ineltek_image_final; "
+
+addtask build_complete after do_image_complete before do_rm_work

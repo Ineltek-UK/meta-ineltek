@@ -21,7 +21,7 @@ SerialConnection {
 		initializeApplet("qspiflash")
 
 		// erase all memory
-		//applet.erase(0, applet.memorySize)
+		applet.erase(0, applet.memorySize)
 
 		// write files
 		applet.write(0x0000, "at91bootstrap.bin", true)
