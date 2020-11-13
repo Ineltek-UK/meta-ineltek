@@ -3,6 +3,7 @@ LICENSE = "MIT"
 PR = "r0"
 
 IMAGE_FEATURES += "ssh-server-openssh"
+IMAGE_INSTALL += "stb"
 
 IMAGE_INSTALL = "\
     libusb1 \
@@ -44,7 +45,6 @@ IMAGE_INSTALL = "\
     mtd-utils-ubifs \
     dtc \
     dtc-misc \
-    stb \
     iproute2 \
     iptables \
     bridge-utils \
