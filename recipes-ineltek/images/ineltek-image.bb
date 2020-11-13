@@ -2,8 +2,7 @@ DESCRIPTION = "Ineltek's E Ink ExtCon Yocto Image"
 LICENSE = "MIT"
 PR = "r0"
 
-IMAGE_FEATURES += "ssh-server-openssh package-management"
-IMAGE_INSTALL += "stb"
+IMAGE_FEATURES += "ssh-server-openssh"
 
 IMAGE_INSTALL = "\
     libusb1 \
@@ -17,10 +16,8 @@ IMAGE_INSTALL = "\
     setserial \
     opkg \
     iperf3 \
-    \
     nbench-byte \
     lmbench \
-    \
     linux-firmware-sd8686 \
     linux-firmware-sd8688 \
     linux-firmware-sd8787 \
@@ -36,7 +33,6 @@ IMAGE_INSTALL = "\
     linux-firmware-rtl8192ce \
     linux-firmware-rtl8192su \
     linux-firmware-rtl8723 \
-    \
     alsa-utils \
     mpg123 \
     i2c-tools \
@@ -48,6 +44,7 @@ IMAGE_INSTALL = "\
     mtd-utils-ubifs \
     dtc \
     dtc-misc \
+    stb \
     iproute2 \
     iptables \
     bridge-utils \
@@ -57,15 +54,11 @@ IMAGE_INSTALL = "\
     gdbserver \
     usbutils \
     wget \
-    ${CORE_IMAGE_EXTRA_INSTALL} \
-    \
     cjson \
     libplanes \
-    \
     libicui18n \
     libv4l \
     v4l-utils \
-    \
     tslib \
     tslib-conf \
     tslib-tests \
@@ -79,15 +72,16 @@ IMAGE_INSTALL = "\
     libsdl \
     libsdl2 \
     libsdl2-image \
-    apt \
-    wireshark \
     libpcap \
     git \
     tcpdump \
+    ${CORE_IMAGE_EXTRA_INSTALL} \
 "
 
 inherit core-image populate_sdk
 
+# This final step is an optional extra used to copy all the files required for
+# programming over to a customer deploy directory - see machine config file.
 do_build_complete() {
     # Copy AT91Bootstrap Binary
     cp ${DEPLOY_DIR}/images/${MACHINE}/at91bootstrap.bin \
@@ -106,14 +100,14 @@ do_build_complete() {
     ${CUSTOM_DEPLOY_DIR}/zImage.bin
 
     # Ensures BitBake can find the bmaptool and dd command
-    export PATH="/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin"
-    # Create virtual image for RootFS with 2 GiB size
+    export PATH="/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin"
+    # Create virtual image for RootFS
     dd if=/dev/zero of=${DEPLOY_DIR}/images/${MACHINE}/${IMAGE_BASENAME}-${MACHINE}.img bs=1M count=1
     # Copy the wic file to our virtual image
     bmaptool copy ${DEPLOY_DIR}/images/${MACHINE}/${IMAGE_BASENAME}-${MACHINE}.wic \
     ${DEPLOY_DIR}/images/${MACHINE}/${IMAGE_BASENAME}-${MACHINE}.img
-    # Copy Virtual Image
-    cp ${DEPLOY_DIR}/images/${MACHINE}/${IMAGE_BASENAME}-${MACHINE}.img \
+    # Move Virtual Image
+    mv ${DEPLOY_DIR}/images/${MACHINE}/${IMAGE_BASENAME}-${MACHINE}.img \
     ${CUSTOM_DEPLOY_DIR}/${IMAGE_BASENAME}-${MACHINE}.img
 
     # Copy SAM-BA QML
@@ -121,4 +115,5 @@ do_build_complete() {
     ${CUSTOM_DEPLOY_DIR}/eink-extcon-demo-qspiflash.qml
 }
 
+# Comment out this line to skip over this step
 addtask build_complete after do_image_complete before do_rm_work
